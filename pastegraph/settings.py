@@ -1,6 +1,11 @@
 # Django settings for pastegraph project.
 
-DEBUG = True
+
+import os
+
+
+DEBUG = eval(os.environ['DEBUG'])
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -78,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '&7yz3*mgveu%7*$5^8x6z!3c9oxs6$9spr+&h2fbd5b09r*rd2'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

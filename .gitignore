@@ -3,3 +3,4 @@ venv
 localrun.sh
 set_heroku_params.sh
 pastegraph/staticfiles/*
+env_params.txt
