@@ -2,6 +2,7 @@
 
 
 import os
+import sys
 
 
 DEBUG = eval(os.environ['DEBUG'])
@@ -10,6 +11,7 @@ TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
+    ('Vitaly Pavlenko', 'cxielamiko@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -144,7 +146,12 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout
+        },
     },
     'loggers': {
         'django.request': {
