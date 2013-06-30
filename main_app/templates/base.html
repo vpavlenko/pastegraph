@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf8">
+    <title>Pastegraph - {% block title %}share graph plots{% endblock %}</title>
+    <!-- <link rel="stylesheet" href="main.css"> -->
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+
+<body>
+    <header>
+    <h2>Pastegraph &ndash; share graph plots</h2>
+    </header>
+
+    <section>
+    {% block content %}
+    {% endblock %}
+    </section>
+    
+    <footer>
+    &copy; 2013 <a href="https://github.com/vpavlenko">Vitaly Pavlenko</a>
+    </footer>
+</body>
+</html>
