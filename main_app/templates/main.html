@@ -1,20 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div id="source">
-    <textarea id="source-textarea" rows="10" cols="20">
+<form id="graph-form">
+    <div id="source">
+        <textarea id="source-textarea" rows="10" cols="20">
 0 1 0
 0 0 1
 1 0 0</textarea>
-</div>
+    </div>
 
-<div id="paste-options">
+    <fieldset id="graph-options">
+        <legend>Graph options</legend>
+        <input type="radio" name="directed" value="true" checked>directed
+        <input type="radio" name="directed" value="false">undirected
+    </fieldset>
 
-<input type="button" value="Preview">
-<input type="button" value="Submit" disabled>
-</div>
+    <fieldset id="plot-options">
+        <legend>Plot options</legend>
+        <input type="radio" name="graphviz-utility" value="dot" checked>dot
+        <input type="radio" name="graphviz-utility" value="neato">neato
+        <br>
+        <input type="button" id='plot-button' value="Plot">
 
-<div id="plot">
+        <input type="hidden" name="image_type" value="png">
+    </fieldset>
+<!-- 
+    <fieldset id="paste-options">
+        <legend>Paste options</legend>
+        <input type="button" value="Submit" disabled>
+    </fieldset> -->
 
-</div>
+    <div id="plot">
+
+    </div>
+
+    <div id="error">
+    
+    </div>
+</form>
 {% endblock %}
