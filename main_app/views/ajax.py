@@ -6,13 +6,17 @@ from main_app.utils import Graphviz
 from file_keeper import save_file
 
 
+GRAPH_OPTIONS = ('directed', 'source_type',)
+PLOT_OPTIONS = ('graphviz_utility', 'image_type',)
+
+
 @require_POST
 def plot(request):
     # ajax request
     # params: graph_source, graph_options, plot_options
     graph_source = request.POST['graph_source']
-    graph_options = request.POST['graph_options']
-    plot_options = request.POST['plot_options']
+    graph_options = {key: request.POST[key] for key in GRAPH_OPTIONS}
+    plot_options = {key: request.POST[key] for key in PLOT_OPTIONS}
 
     mime, base64 = Graphviz.render(graph_source, graph_options, plot_options)
     hash_ = save_file(mime, base64)

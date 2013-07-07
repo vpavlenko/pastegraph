@@ -3,7 +3,7 @@ import json
 
 import requests
 
-import settings
+from django.conf import settings
 
 
 def convert_into_numbers(s):
@@ -74,10 +74,8 @@ ratio = auto;''')
 
 
 class Graphviz:
-    def __init__(self):
-        pass
-
-    def render(self, graph_source, graph_options, plot_options):
+    @classmethod
+    def render(cls, graph_source, graph_options, plot_options):
         '''
         Return a tuple (mime-type, base-64-encoded-file)
         '''
@@ -88,5 +86,5 @@ class Graphviz:
         params = {'description': description,
                   'graphviz_utility': graphviz_utility,
                   'image_type': image_type}
-        r = requests.post(settings.GRAPHVIZ_URL, data=json.dumps(params))
-        return r.mime, r.base64
+        r = requests.post(settings.GRAPHVIZ_URL, data=json.dumps(params), timeout=40000).json()
+        return r['mime'], r['base64']

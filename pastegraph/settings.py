@@ -174,4 +174,4 @@ LOGGING = {
 }
 
 
-GRAPHVIZ_URL = os.environ('GRAPHVIZ_URL')
+GRAPHVIZ_URL = os.environ['GRAPHVIZ_URL']
