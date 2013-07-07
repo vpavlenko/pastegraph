@@ -9,6 +9,7 @@ from file_keeper import save_file
 
 GRAPH_OPTIONS = ('directed', 'source_type',)
 PLOT_OPTIONS = ('graphviz_utility', 'image_type',)
+GRAPH_SOURCE_LIMIT = 60000
 
 
 @require_POST
@@ -18,6 +19,9 @@ def plot(request):
     graph_source = request.POST['graph_source']
     graph_options = {key: request.POST[key] for key in GRAPH_OPTIONS}
     plot_options = {key: request.POST[key] for key in PLOT_OPTIONS}
+
+    if len(graph_source) > GRAPH_SOURCE_LIMIT:
+        return HttpResponse(status=413)
 
     mime, base64 = Graphviz.render(graph_source, graph_options, plot_options)
     hash_ = save_file(mime, base64)
