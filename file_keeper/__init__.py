@@ -15,7 +15,7 @@ def save_file(mime, base64):
     can the be used as URL.
     '''
     hash_ = file_keeper_hash(mime, base64)
-    objects = File.objects.filter(hash_=hash_)
+    objects = File.objects.filter(hash=hash_)
     if not objects:
         file_ = File(mime=mime, base64=base64)
         file_.save()
