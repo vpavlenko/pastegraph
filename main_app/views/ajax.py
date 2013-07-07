@@ -9,7 +9,7 @@ from file_keeper import save_file
 
 GRAPH_OPTIONS = ('directed', 'source_type',)
 PLOT_OPTIONS = ('graphviz_utility', 'image_type',)
-GRAPH_SOURCE_LIMIT = 60000
+GRAPH_SOURCE_LIMIT = 1000
 
 
 @require_POST

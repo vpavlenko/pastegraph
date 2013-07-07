@@ -2,3 +2,4 @@ venv
 *.pyc
 pastegraph/staticfiles/*
 env_params.txt
+*.tmp

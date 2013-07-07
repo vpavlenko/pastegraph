@@ -94,5 +94,5 @@ class Graphviz:
         params = {'description': description,
                   'graphviz_utility': graphviz_utility,
                   'image_type': image_type}
-        r = requests.post(settings.GRAPHVIZ_URL, data=json.dumps(params), timeout=40000).json()
+        r = requests.post(settings.GRAPHVIZ_URL, data=json.dumps(params), timeout=20).json()
         return r['mime'], r['base64']
