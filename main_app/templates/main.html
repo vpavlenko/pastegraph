@@ -17,10 +17,11 @@
 
         <fieldset id="graph-options">
             <legend>Graph options</legend>
+            <input type="radio" name="source_type" value="adjacency_matrix" checked>adjacency matrix
+            <input type="radio" name="source_type" value="edges_list">edges list
+            <br>
             <input type="radio" name="directed" value="true" checked>directed
             <input type="radio" name="directed" value="false">undirected
-
-            <input type="hidden" name="source_type" value="adjacency_matrix">
         </fieldset>
 
         <fieldset id="plot-options">

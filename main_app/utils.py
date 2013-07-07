@@ -52,7 +52,12 @@ class Graph:
                     self.add_edge(i + 1, j + 1)
 
     def _from_edges_list(self):
-        raise NotImplementedError()
+        lines = self.raw_numbers
+        min_vertex = min(min(line) for line in lines)
+        max_vertex = max(max(line) for line in lines)
+        self.num_vertices = max_vertex - min_vertex + 1
+        for u, v in lines:
+            self.add_edge(u, v)
 
     def add_edge(self, i, j):
         self.edges[i].add(j)

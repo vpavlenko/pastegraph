@@ -19,10 +19,3 @@ Actual working [Procfile](../master/Procfile) differs: see this repo
 Zen
 ---
 http://www.12factor.net/
-
-WebDot
-------
-Deployed to Amazon AWS:
-http://ec2-54-218-58-149.us-west-2.compute.amazonaws.com/cgi-bin/webdot/http://www.graphviz.org/webdot/basic.dot.dot.svg
-
-Known issue: png-gif-jpeg generation not working (God knows why).
