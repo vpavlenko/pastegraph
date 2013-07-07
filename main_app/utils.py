@@ -45,6 +45,7 @@ class Graph:
     def _from_adjacency_matrix(self):
         lines = self.raw_numbers
         self.num_vertices = len(lines)
+        self.vertices = list(range(1, self.num_vertices + 1))
         assert all(self.num_vertices == len(line) for line in lines)
         for i in range(self.num_vertices):
             for j in range(self.num_vertices):
@@ -56,6 +57,7 @@ class Graph:
         min_vertex = min(min(line) for line in lines)
         max_vertex = max(max(line) for line in lines)
         self.num_vertices = max_vertex - min_vertex + 1
+        self.vertices = list(range(min_vertex, max_vertex + 1))
         for u, v in lines:
             self.add_edge(u, v)
 
@@ -68,7 +70,7 @@ class Graph:
         description.append('''G {
 fontsize = 4.0;
 ratio = auto;''')
-        for v in self.edges:
+        for v in self.vertices:
             description.append('{0} [shape = circle, height=.1, width=.1];'.format(v))
         for v in self.edges:
             for w in self.edges[v]:
