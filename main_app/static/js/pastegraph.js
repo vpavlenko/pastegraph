@@ -43,11 +43,15 @@ $(document).ready(function() {
 
     $('#plot-button').click(function() {
         $('#error').html('');
+        $('#plot-img').hide();
         $('#ajax-loader').show();
+        // $('#plot').hide();
         $.post('plot/', $('#graph-form').serialize())
         .done(function(data, textStatus, jqXHR) {
             $('#ajax-loader').hide();
-            $('#plot').html($('<img>').attr('src', 'file/get/' + data['image_hash']));
+            // $('#plot').html($('<img>').attr('src', 'file/get/' + data['image_hash']));
+            $('#plot-img').attr('src', 'file/get/' + data['image_hash']);
+            $('#plot-img').show();
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             $('#ajax-loader').hide();            

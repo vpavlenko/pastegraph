@@ -1,3 +1,19 @@
 #error {
     color: red;
 }
+
+#setup {
+    float: left;
+    width: 30%;
+}
+
+#plot {
+    float: left;
+    border: 1px black solid;
+    padding: 1em 1em 1em 1em;
+    margin-left: 1em;
+}
+
+#error {
+    clear: both;
+}
