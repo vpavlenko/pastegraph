@@ -5,6 +5,7 @@ import subprocess
 import json
 import http.server
 import socketserver
+import mimetypes
 
 PORT = 9999
 ALLOWED_GRAPHVIZ_UTILITIES = ['dot', 'neato']
@@ -19,7 +20,7 @@ def graphviz_process(params):
                                stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE)
     output, errors = process.communicate(params['description'].encode('ascii'))
-    mime = 'image/{0}'.format(params['image_type'])
+    mime = mimetypes.guess_type('a.{0}'.format(params['image_type']))[0]
     return mime, base64.b64encode(output).decode('ascii'), errors
 
 
@@ -41,7 +42,9 @@ class GraphvizHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
 
             data = {'mime': mime, 'base64': base64_output}
-            self.wfile.write(json.dumps(data).encode('utf-8'))
+            output = json.dumps(data)
+            self.wfile.write(output.encode('utf-8'))
+            self.log_message(output)
 
 
 socketserver.TCPServer.allow_reuse_address = True

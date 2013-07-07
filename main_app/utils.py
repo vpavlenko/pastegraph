@@ -67,8 +67,9 @@ ratio = auto;''')
             description.append('{0} [shape = circle, height=.1, width=.1];'.format(v))
         for v in self.edges:
             for w in self.edges[v]:
-                description.append('{0} {2} {1} [ label = "" ];'.format(
-                    v, w, '->' if self.directed else '--'))
+                if self.directed or v < w:
+                    description.append('{0} {2} {1} [ label = "" ];'.format(
+                        v, w, '->' if self.directed else '--'))
         description.append('}')
         return '\n'.join(description)
 

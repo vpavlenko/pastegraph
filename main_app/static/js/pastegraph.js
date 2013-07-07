@@ -37,12 +37,20 @@ $(document).ready(function() {
         $('#error').html('An error occured during ' + action + ': <br>' + jqXHR.responseText);
     }
 
+    function clean_errors() {
+        $('#error').html('');
+    }
+
     $('#plot-button').click(function() {
+        $('#error').html('');
+        $('#ajax-loader').show();
         $.post('plot/', $('#graph-form').serialize())
         .done(function(data, textStatus, jqXHR) {
-            alert(data);
+            $('#ajax-loader').hide();
+            $('#plot').html($('<img>').attr('src', 'file/get/' + data['image_hash']));
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
+            $('#ajax-loader').hide();            
             handle_error('sending grah data to plot', jqXHR, textStatus, errorThrown);
         })
     })

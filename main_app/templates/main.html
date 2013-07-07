@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block content %}
 <form id="graph-form">
     {% csrf_token %}
     <div id="source">
         <textarea id="source-textarea" name="graph_source" rows="10" cols="20">
-0 1 0
 0 0 1
-1 0 0</textarea>
+0 0 1
+1 1 0</textarea>
     </div>
 
     <fieldset id="graph-options">
@@ -24,6 +25,7 @@
         <input type="radio" name="graphviz_utility" value="neato">neato
         <br>
         <input type="button" id='plot-button' value="Plot">
+        <img id="ajax-loader" src="{% static "img/ajax-loader.gif" %}" style="display: none;">
 
         <input type="hidden" name="image_type" value="svg">
     </fieldset>

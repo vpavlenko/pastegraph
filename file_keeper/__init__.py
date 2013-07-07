@@ -1,11 +1,13 @@
 import hashlib
 import pickle
+import mimetypes
 
 from models import File
 
 
 def file_keeper_hash(mime, base64):
-    return hashlib.sha224(pickle.dumps((mime, base64))).hexdigest()
+    print(mime, mimetypes.guess_extension(mime))
+    return hashlib.sha224(pickle.dumps((mime, base64))).hexdigest() + mimetypes.guess_extension(mime)
 
 
 def save_file(mime, base64):
@@ -17,6 +19,6 @@ def save_file(mime, base64):
     hash_ = file_keeper_hash(mime, base64)
     objects = File.objects.filter(hash=hash_)
     if not objects:
-        file_ = File(mime=mime, base64=base64)
+        file_ = File(hash=hash_, mime=mime, base64=base64)
         file_.save()
     return hash_

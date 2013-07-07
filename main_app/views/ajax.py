@@ -1,5 +1,6 @@
 import json
 
+from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 
 from main_app.utils import Graphviz
@@ -21,4 +22,4 @@ def plot(request):
     mime, base64 = Graphviz.render(graph_source, graph_options, plot_options)
     hash_ = save_file(mime, base64)
     data = {'image_hash': hash_}
-    return json.dumps(data)
+    return HttpResponse(json.dumps(data), mimetype="application/json")
