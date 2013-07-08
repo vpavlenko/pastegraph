@@ -9,9 +9,15 @@
             <legend>Adjacency matrix or edges list</legend>
             <div id="source">
                 <textarea id="source-textarea" name="graph_source" rows="10" cols="20">
-0 0 1
-0 0 1
-1 1 0</textarea>
+0 1 0 0
+0 0 1 1
+0 0 0 0
+0 0 0 0</textarea>
+            </div>
+            <div id="source-hint">You can also specify this graph as an edges list:
+               <pre>1 2
+2 3
+2 4</pre>
             </div>
         </fieldset>
 
@@ -29,7 +35,10 @@
             <input type="radio" name="graphviz_utility" value="dot" checked>dot
             <input type="radio" name="graphviz_utility" value="neato">neato
             <br>
-            <input type="button" id='plot-button' value="Plot">
+            <input type="button" id='graphviz-plot-button' value="Graphviz">
+            <br>
+            <hr>
+            <input type="button" id='springy-simple-plot-button' value="Springy">
 
             <input type="hidden" name="image_type" value="svg">
         </fieldset>
@@ -40,9 +49,15 @@
         </fieldset> -->
     </div>
 
-    <div id="plot">
-        <img id="ajax-loader" src="{% static "img/ajax-loader.gif" %}" style="display: none;">
-        <img id="plot-img">
+    <div id="plot-results">
+        <div id="graphviz-plot-result" class="plot-result">
+            <img id="ajax-loader" src="{% static "img/ajax-loader.gif" %}" style="display: none;">
+            <img id="graphviz-plot-img">
+        </div>
+
+        <div id="springy-simple-plot-result" class="plot-result">
+            <canvas id="springy-simple-canvas" width="640" height="480" />
+        </div>
     </div>
 
     <div id="error">

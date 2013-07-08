@@ -7,13 +7,46 @@
     width: 30%;
 }
 
-#plot {
+#plot-results {
     float: left;
     border: 1px black solid;
-    padding: 1em 1em 1em 1em;
     margin-left: 1em;
+    display: none;
+}
+
+#ajax-loader {
+    padding: 1em 1em 1em 1em;
 }
 
 #error {
     clear: both;
+}
+
+.plot-result:first-of-type {
+    display: block;
+}
+
+.plot-result:not(:first-of-type) {
+    display: none;
+}
+
+#source {
+    display: inline-block;
+    width: 45%;
+}
+
+#source-hint {
+    display: inline-block;
+    width: 45%;
+    vertical-align: top;
+    color: gray;
+    margin-left: 1em;
+}
+
+.ajax-loader-rendering {
+    background-color: lightyellow;
+}
+
+.ajax-loader-loading {
+    background-color: lightgreen;
 }
