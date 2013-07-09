@@ -2,18 +2,6 @@
     color: red;
 }
 
-#setup {
-    float: left;
-    width: 30%;
-}
-
-#plot-results {
-    float: left;
-    border: 1px black solid;
-    margin-left: 1em;
-    display: none;
-}
-
 #ajax-loader {
     padding: 1em 1em 1em 1em;
 }
@@ -30,23 +18,23 @@
     display: none;
 }
 
-#source {
-    display: inline-block;
-    width: 45%;
+#source-textarea {
+    height: 10em;
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
 }
 
 #source-hint {
-    display: inline-block;
-    width: 45%;
-    vertical-align: top;
     color: gray;
-    margin-left: 1em;
+}
+
+#source-hint-clickable {
+    border-bottom: 1px dotted gray;
 }
 
 .ajax-loader-rendering {
-    background-color: lightyellow;
+    /*background-color: lightyellow;*/
 }
 
 .ajax-loader-loading {
-    background-color: lightgreen;
+    /*background-color: lightgreen;*/
 }

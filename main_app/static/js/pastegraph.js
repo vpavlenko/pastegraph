@@ -144,4 +144,10 @@ $(document).ready(function() {
             $('#springy-simple-plot-result').hide();
         }
     })
+
+    $('#source-hint-clickable').click(function() {
+        $('#source-textarea').val('1 2\n1 3\n1 4\n2 3\n3 4\n4 2');
+        $('input[name=source_type][value=edges_list]').prop('checked', true);
+        return false;
+    });
 })

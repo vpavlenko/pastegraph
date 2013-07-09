@@ -7,6 +7,7 @@
     <meta charset="utf8">
     <title>Pastegraph - {% block title %}plot graphs{% endblock %}</title>
     <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="{% static "foundation/css/foundation.css" %}">
     <style type="text/css">
 
     </style>
@@ -15,24 +16,42 @@
 
     <script type="text/javascript" src="{% static "third_party_gd/springy/springy.js" %}"></script>
     <script type="text/javascript" src="{% static "third_party_gd/springy/springyui.js" %}"></script>
+
+    <script src="{% static "foundation/js/vendor/custom.modernizr.js" %}"></script>
 </head>
 
 <body>
     <a href="https://github.com/vpavlenko/pastegraph"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
 
-    <header>
-    <h2>Pastegraph &ndash; plot graphs</h2>
+    <header class="row">
+        <div class="large-12 columns">
+            <h2>Pastegraph &ndash; plot graphs</h2>
+        </div>
     </header>
 
-    <section>
+    <section class="row">
     {% block content %}
     {% endblock %}
     </section>
     
-    <footer>
+    <footer class="row">
+    <div class="large-12 columns">
     &copy; 2013 <a href="https://github.com/vpavlenko">Vitaly Pavlenko</a>
+    </div>
     </footer>
 
     <!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter21721663 = new Ya.Metrika({id:21721663, webvisor:true, clickmap:true, trackLinks:true, accurateTrackBounce:true, trackHash:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/21721663" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+
+    <script>
+        document.write('<script src=' +
+        ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+        '.js><\/script>')
+    </script>
+
+    <script src="js/foundation.min.js"></script>
+
+    <script>
+        $(document).foundation();
+    </script>    
 </body>
 </html>

@@ -2,54 +2,49 @@
 {% load staticfiles %}
 
 {% block content %}
+
+<div class="row">
+<div class="large-4 columns">
+
 <form id="graph-form">
     {% csrf_token %}
-    <div id="setup">
         <fieldset>
             <legend>Adjacency matrix or edges list</legend>
             <div id="source">
-                <textarea id="source-textarea" name="graph_source" rows="10" cols="20">
-0 1 0 0
-0 0 1 1
-0 0 0 0
-0 0 0 0</textarea>
+                <textarea id="source-textarea" name="graph_source" class="code">
+0 1 1 1
+0 0 1 0
+0 0 0 1
+0 1 0 0</textarea>
             </div>
-            <div id="source-hint">You can also specify this graph as an edges list:
-               <pre>1 2
-2 3
-2 4</pre>
-            </div>
+            <span id="source-hint">or <a href="" id="source-hint-clickable">as list of edges</a></span>
         </fieldset>
 
         <fieldset id="graph-options">
             <legend>Graph options</legend>
+            <div class="row">
+                <div class="large-12 columns">
             <input type="radio" name="source_type" value="adjacency_matrix" checked>adjacency matrix
-            <input type="radio" name="source_type" value="edges_list">edges list
-            <br>
+            <input type="radio" name="source_type" value="edges_list">list of edges
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
             <input type="radio" name="directed" value="true" checked>directed
             <input type="radio" name="directed" value="false">undirected
+                </div>
+            </div>
         </fieldset>
 
-        <fieldset id="plot-options">
-            <legend>Plot options</legend>
-            <input type="radio" name="graphviz_utility" value="dot" checked>dot
-            <input type="radio" name="graphviz_utility" value="neato">neato
-            <br>
-            <input type="button" id='graphviz-plot-button' value="Graphviz">
-            <br>
-            <hr>
-            <input type="button" id='springy-simple-plot-button' value="Springy">
+        <input type="hidden" name="graphviz_utility" value="neato" checked>
+        <input type="button" class="small button" id='springy-simple-plot-button' value="Springy">
+        <input type="button" class="small button" id='graphviz-plot-button' value="Graphviz">
 
-            <input type="hidden" name="image_type" value="svg">
-        </fieldset>
-    <!-- 
-        <fieldset id="paste-options">
-            <legend>Paste options</legend>
-            <input type="button" value="Submit" disabled>
-        </fieldset> -->
-    </div>
+        <input type="hidden" name="image_type" value="svg">
+</form>
+</div>
 
-    <div id="plot-results">
+    <div id="plot-results" class="large-8 columns">
         <div id="graphviz-plot-result" class="plot-result">
             <img id="ajax-loader" src="{% static "img/ajax-loader.gif" %}" style="display: none;">
             <img id="graphviz-plot-img">
@@ -59,9 +54,10 @@
             <canvas id="springy-simple-canvas" width="640" height="480" />
         </div>
     </div>
+</div>
 
-    <div id="error">
+    <div id="error" class="row">
     
     </div>
-</form>
+
 {% endblock %}
