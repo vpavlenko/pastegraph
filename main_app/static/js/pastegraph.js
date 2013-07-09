@@ -35,17 +35,20 @@ $(document).ready(function() {
 
     function handle_error(action, jqXHR, textStatus, errorThrown) {
         $('#error').html('An error occured during ' + action + ': <br>' + jqXHR.responseText);
+        $('#error').show();
     }
 
     function js_error(report) {
         $('#error').text(report);
+        $('#error').show();
     }
 
     function clean_errors() {
-        $('#error').html('');
+        $('#error').hide();
     }
 
     function switch_to_method(name) {
+        clean_errors();
         $('#plot-results').show();
         $('#plot-results > *').hide();
         $('#' + name + '-plot-result').show();
@@ -54,7 +57,7 @@ $(document).ready(function() {
 
     function to_2d_array(lines) {
         return jQuery.map(lines.split("\n"), function(line) {
-            return [line.split(' ')];
+            return [$.trim(line).split(' ')];
         });
     }
 
@@ -75,7 +78,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < num_vertices; ++i) {
                 if (lines[i].length != num_vertices) {
-                    js_error('Invalid amount of number at line ' + (i + 1) + 
+                    js_error('Invalid amount of numbers at line ' + (i + 1) + 
                             ': expected ' + num_vertices + ', got ' + 
                             lines[i].length);
                     return undefined;
@@ -89,7 +92,7 @@ $(document).ready(function() {
         } else {
             for (var i in lines) {
                 if (lines[i].length != 2) {
-                    js_error('Invalid amount of number at line ' + (parseInt(i, 10) + 1) + 
+                    js_error('Invalid amount of numbers at line ' + (parseInt(i, 10) + 1) + 
                             ': expected 2, got ' + 
                             lines[i].length);
                     return undefined;

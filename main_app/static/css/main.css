@@ -1,13 +1,9 @@
-#error {
-    color: red;
-}
-
 #ajax-loader {
     padding: 1em 1em 1em 1em;
 }
 
 #error {
-    clear: both;
+    display: none;
 }
 
 .plot-result:first-of-type {
