@@ -85,7 +85,7 @@ $(document).ready(function() {
                 }
                 for (var j = 0; j < num_vertices; ++j) {
                     if (lines[i][j] != 0) {
-                        graph.addEdges([min_number + i, min_number + j, {directed: directed}]);
+                        graph.addEdges([min_number + i, min_number + j, {directional: directed}]);
                     }
                 }
             }
@@ -103,7 +103,7 @@ $(document).ready(function() {
                 if (!(lines[i][1] in graph.nodeSet)) {
                     graph.addNodes(lines[i][1]);
                 }
-                graph.addEdges([lines[i][0], lines[i][1], {directed: directed}]);
+                graph.addEdges([lines[i][0], lines[i][1], {directional: directed}]);
             }
         }
 
@@ -151,6 +151,7 @@ $(document).ready(function() {
     $('#source-hint-clickable').click(function() {
         $('#source-textarea').val('1 2\n1 3\n1 4\n2 3\n3 4\n4 2');
         $('input[name=source_type][value=edges_list]').prop('checked', true);
+        $('#source-hint').hide();
         return false;
     });
 })
