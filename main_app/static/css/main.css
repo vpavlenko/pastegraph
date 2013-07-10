@@ -1,3 +1,7 @@
+body {
+    padding-bottom: 10px;
+}
+
 #ajax-loader {
     padding: 1em 1em 1em 1em;
 }
@@ -33,4 +37,33 @@
 
 .ajax-loader-loading {
     /*background-color: lightgreen;*/
+}
+
+.source-type-choice {
+    padding: 3px;
+}
+
+.source-type-choice:hover {
+    background-color: #fff6f0;
+}
+
+.source-type-choice.source-type-selected {
+    border: 1px solid #ff7518; /* #ff7518 */
+    color: black;
+}
+
+.source-type-choice:not(.source-type-selected) {
+    border-bottom: 1px dotted orange;
+}
+
+/*.source-type-choice:not(:last-of-type) {
+    margin-right: 3em;
+}*/
+
+.source-type-choice:first-of-type {
+    float: left;
+}
+
+.source-type-choice:last-of-type {
+    float: right;
 }

@@ -38,7 +38,7 @@ $(document).ready(function() {
         $('#error').show();
     }
 
-    function js_error(report) {
+    js_error = function(report) {
         $('#error').text(report);
         $('#error').show();
     }
@@ -54,62 +54,7 @@ $(document).ready(function() {
         $('#' + name + '-plot-result').show();
         $('#error').html('');
     }
-
-    function to_2d_array(lines) {
-        return jQuery.map(lines.split("\n"), function(line) {
-            return [$.trim(line).split(' ')];
-        });
-    }
-
-    function build_graph() {
-        // Build graph from #source using #graph-options.
-        // Return instance of Springy.Graph class.
-        var graph = new Springy.Graph();
-        var lines = to_2d_array($('#source-textarea').val());
-        var directed = $('input:radio[name=directed]:checked').val() === "true";
-
-        if ($('input:radio[name=source_type]:checked').val() == 'adjacency_matrix') {
-            var min_number = 1;
-            var num_vertices = lines.length;
-
-            for (var i = min_number; i < min_number + num_vertices; ++i) {
-                graph.addNodes(i);
-            }
-
-            for (var i = 0; i < num_vertices; ++i) {
-                if (lines[i].length != num_vertices) {
-                    js_error('Invalid amount of numbers at line ' + (i + 1) + 
-                            ': expected ' + num_vertices + ', got ' + 
-                            lines[i].length);
-                    return undefined;
-                }
-                for (var j = 0; j < num_vertices; ++j) {
-                    if (lines[i][j] != 0) {
-                        graph.addEdges([min_number + i, min_number + j, {directional: directed}]);
-                    }
-                }
-            }
-        } else {
-            for (var i in lines) {
-                if (lines[i].length != 2) {
-                    js_error('Invalid amount of numbers at line ' + (parseInt(i, 10) + 1) + 
-                            ': expected 2, got ' + 
-                            lines[i].length);
-                    return undefined;
-                }
-                if (!(lines[i][0] in graph.nodeSet)) {
-                    graph.addNodes(lines[i][0]);
-                }
-                if (!(lines[i][1] in graph.nodeSet)) {
-                    graph.addNodes(lines[i][1]);
-                }
-                graph.addEdges([lines[i][0], lines[i][1], {directional: directed}]);
-            }
-        }
-
-        return graph;
-    }
-
+    
     $('#graphviz-plot-button').click(function() {
         switch_to_method('graphviz');
         
@@ -146,7 +91,7 @@ $(document).ready(function() {
         } else {
             $('#springy-simple-plot-result').hide();
         }
-    })
+    });
 
     $('#source-hint-clickable').click(function() {
         $('#source-textarea').val('1 2\n1 3\n1 4\n2 3\n3 4\n4 2');
@@ -154,6 +99,38 @@ $(document).ready(function() {
         $('#source-hint').hide();
         return false;
     });
+
+    $('#source-type-to-adjacency-matrix').click(function() {
+        if (!$('#source-type-to-adjacency-matrix').hasClass('source-type-selected')) {
+            $('#source-textarea').val(graph_to_adjacency_matrix(build_graph()));
+        }
+
+        $('.source-type-choice').removeClass('source-type-selected');
+        $('#source-type-to-adjacency-matrix').addClass('source-type-selected');
+
+        $('input[name=source_type]').val('adjacency_matrix');
+
+        return false;
+    });
+
+    $('#source-type-to-edge-list').click(function() {
+        if (!$('#source-type-to-edge-list').hasClass('source-type-selected')) {
+            $('#source-textarea').val(graph_to_edge_list(build_graph()));
+        }
+
+        $('.source-type-choice').removeClass('source-type-selected');
+        $('#source-type-to-edge-list').addClass('source-type-selected');
+
+        $('input[name=source_type]').val('edges_list');
+
+        return false;
+    });
+
+    $('input[name=directional]').click(function() {
+        $('input[name=directed]').val($('input[name=directional]').prop('checked'));
+    });
+
+    // perform on start
 
     $('#springy-simple-plot-button').click();
 })

@@ -9,7 +9,7 @@
 <form id="graph-form">
     {% csrf_token %}
         <fieldset>
-            <legend>Adjacency matrix or edge list</legend>
+            <legend>Graph source</legend>
             <div id="source">
                 <textarea id="source-textarea" name="graph_source" class="code">
 0 1 1 1
@@ -17,24 +17,14 @@
 0 0 0 1
 0 1 0 0</textarea>
             </div>
-            <span id="source-hint">or <a href="" id="source-hint-clickable">as edge list</a></span>
+            <a class="source-type-choice source-type-selected" id="source-type-to-adjacency-matrix">adjacency matrix</a>
+            <a class="source-type-choice" id="source-type-to-edge-list">edge list</a>
+            <div style="clear: both; padding-bottom: 1em;"></div>
+            <input type="checkbox" name="directional" checked>directional
+            <input type="hidden" name="directed" value="true">
+            <input type="hidden" name="source_type" value="adjacency_matrix">
         </fieldset>
 
-        <fieldset id="graph-options">
-            <legend>Graph options</legend>
-            <div class="row">
-                <div class="large-12 columns">
-            <input type="radio" name="source_type" value="adjacency_matrix" checked>adjacency matrix
-            <input type="radio" name="source_type" value="edges_list">edge list
-                </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns">
-            <input type="radio" name="directed" value="true" checked>directed
-            <input type="radio" name="directed" value="false">undirected
-                </div>
-            </div>
-        </fieldset>
 
         <input type="hidden" name="graphviz_utility" value="neato" checked>
         <input type="button" class="small button" id='springy-simple-plot-button' value="Springy">
