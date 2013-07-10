@@ -133,7 +133,7 @@ $(document).ready(function() {
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
             $('#ajax-loader').hide();            
-            handle_error('sending grah data to plot', jqXHR, textStatus, errorThrown);
+            handle_error('sending graph data to plot', jqXHR, textStatus, errorThrown);
         })
     })
 
@@ -154,4 +154,6 @@ $(document).ready(function() {
         $('#source-hint').hide();
         return false;
     });
+
+    $('#springy-simple-plot-button').click();
 })
