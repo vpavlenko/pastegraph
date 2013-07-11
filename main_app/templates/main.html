@@ -19,36 +19,50 @@
             </div>
             <a class="source-type-choice source-type-selected" id="source-type-to-adjacency-matrix">adjacency matrix</a>
             <a class="source-type-choice" id="source-type-to-edge-list">edge list</a>
-            <div style="clear: both; padding-bottom: 1em;"></div>
-            <input type="checkbox" name="directional" checked>directional
+
+            <div style="clear: both; padding-bottom: 0.5em;"></div>
+
+            <input type="checkbox" name="directional" id="directional-checkbox" checked> directional
             <input type="hidden" name="directed" value="true">
             <input type="hidden" name="source_type" value="adjacency_matrix">
         </fieldset>
 
 
         <input type="hidden" name="graphviz_utility" value="neato" checked>
-        <input type="button" class="small button" id='springy-simple-plot-button' value="Springy">
-        <input type="button" class="small button" id='graphviz-plot-button' value="Graphviz">
+        <!-- <input type="button" class="small button" id='springy-simple-plot-button' value="Springy">
+        <input type="button" class="small button" id='graphviz-plot-button' value="Graphviz"> -->
 
         <input type="hidden" name="image_type" value="svg">
 </form>
 </div>
 
-    <div id="plot-results" class="large-8 columns">
-        <div id="graphviz-plot-result" class="plot-result">
-            <img id="ajax-loader" src="{% static "img/ajax-loader.gif" %}" style="display: none;">
-            <img id="graphviz-plot-img">
-        </div>
+    <div class="large-8 columns">
+        <div id="plot-results" class="section-container auto" data-section>
+            <section>
+                <p class="title" data-section-title><a href="#springy-simple" id="springy-simple-link">Springy</a></p>
+                <div class="content" data-section-content>
+                    <div id="springy-simple-plot-result" class="plot-result">
+                        
+                    </div>
+                </div>
+            </section>
 
-        <div id="springy-simple-plot-result" class="plot-result">
-            <canvas id="springy-simple-canvas" width="640" height="480" />
+            <section>
+                <p class="title" data-section-title><a href="#graphviz" id="graphviz-link">Graphviz</a></p>  
+                <div class="content" data-section-content>
+                    <div id="graphviz-plot-result" class="plot-result">
+                        <img id="ajax-loader" src="{% static "img/ajax-loader.gif" %}" style="display: none;">
+                        <img id="graphviz-plot-img">
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="large-12 columns">
-        <div id="error" class="alert-box alert">
+        <div class="alert-box alert" id="error">
         </div>
     </div>
 </div>

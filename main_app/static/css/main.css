@@ -10,14 +10,6 @@ body {
     display: none;
 }
 
-.plot-result:first-of-type {
-    display: block;
-}
-
-.plot-result:not(:first-of-type) {
-    display: none;
-}
-
 #source-textarea {
     height: 10em;
     font-family: Consolas, "Liberation Mono", Courier, monospace;
@@ -47,13 +39,18 @@ body {
     background-color: #fff6f0;
 }
 
+.source-type-choice:hover:not(.source-type-selected) {
+    border: 1px solid #ff7518; /* #ff7518 */
+}
+
 .source-type-choice.source-type-selected {
     border: 1px solid #ff7518; /* #ff7518 */
-    color: black;
+    color: #ff7518;
 }
 
 .source-type-choice:not(.source-type-selected) {
-    border-bottom: 1px dotted orange;
+    border-bottom: 1px dashed orange;
+    color: black;
 }
 
 /*.source-type-choice:not(:last-of-type) {

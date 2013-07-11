@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    var current_plot_method = undefined;
+
     // famous Ajax setup for Django CSRF Protection
     $(function(){
         $.ajaxSetup({ 
@@ -27,14 +29,8 @@ $(document).ready(function() {
         });
     });
 
-
-    // TODO: add state logic
-
-    // AVAILABLE_STATES = ['create_new', 'show_paste'];
-    // state = 'create_new';
-
     function handle_error(action, jqXHR, textStatus, errorThrown) {
-        $('#error').html('An error occured during ' + action + ': <br>' + jqXHR.responseText);
+        $('#error').html($('<pre>').html('An error occured during ' + action + ': <br>' + jqXHR.responseText));
         $('#error').show();
     }
 
@@ -45,18 +41,31 @@ $(document).ready(function() {
 
     function clean_errors() {
         $('#error').hide();
+        $('#error').html('');
     }
 
     function switch_to_method(name) {
         clean_errors();
-        $('#plot-results').show();
-        $('#plot-results > *').hide();
-        $('#' + name + '-plot-result').show();
-        $('#error').html('');
     }
     
-    $('#graphviz-plot-button').click(function() {
-        switch_to_method('graphviz');
+    function light_update() {
+        clean_errors();
+
+        if (current_plot_method == 'springy-simple') {
+            $('#springy-simple-link').click();
+        }
+    }
+
+    function hard_update() {
+        clean_errors();
+
+        $('#' + current_plot_method + '-link').click();
+    }
+
+    $('#graphviz-link').click(function() {
+        clean_errors();
+
+        current_plot_method = 'graphviz';
         
         $('#graphviz-plot-result').removeClass('ajax-loader-rendering');
         $('#graphviz-plot-result').removeClass('ajax-loader-loading');
@@ -82,25 +91,22 @@ $(document).ready(function() {
         })
     })
 
-    $('#springy-simple-plot-button').click(function() {
-        switch_to_method('springy-simple');
-        
+    $('#springy-simple-link').click(function() {
+        clean_errors();
+
+        current_plot_method = 'springy-simple';
+
         var graph = build_graph();
         if (graph !== undefined) {
-            $('#springy-simple-canvas').springy({graph: graph});
-        } else {
-            $('#springy-simple-plot-result').hide();
+            var canvas = $('<canvas width="640" height="400" />')
+            $('#springy-simple-plot-result').html(canvas);
+            canvas.springy({graph: graph});
         }
     });
 
-    $('#source-hint-clickable').click(function() {
-        $('#source-textarea').val('1 2\n1 3\n1 4\n2 3\n3 4\n4 2');
-        $('input[name=source_type][value=edges_list]').prop('checked', true);
-        $('#source-hint').hide();
-        return false;
-    });
-
     $('#source-type-to-adjacency-matrix').click(function() {
+        clean_errors();
+
         if (!$('#source-type-to-adjacency-matrix').hasClass('source-type-selected')) {
             $('#source-textarea').val(graph_to_adjacency_matrix(build_graph()));
         }
@@ -114,6 +120,8 @@ $(document).ready(function() {
     });
 
     $('#source-type-to-edge-list').click(function() {
+        clean_errors();
+
         if (!$('#source-type-to-edge-list').hasClass('source-type-selected')) {
             $('#source-textarea').val(graph_to_edge_list(build_graph()));
         }
@@ -130,7 +138,15 @@ $(document).ready(function() {
         $('input[name=directed]').val($('input[name=directional]').prop('checked'));
     });
 
+    $('#source-textarea').keyup(function() {
+        light_update();
+    });
+
+    $('#directional-checkbox').click(function() {
+        hard_update();
+    });
+
     // perform on start
 
-    $('#springy-simple-plot-button').click();
+    $('#springy-simple-link').click();
 })

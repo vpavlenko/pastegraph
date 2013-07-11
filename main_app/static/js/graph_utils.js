@@ -10,7 +10,7 @@ $(document).ready(function() {
         // Return instance of Springy.Graph class.
 
         var graph = new Springy.Graph();
-        var lines = to_2d_array($('#source-textarea').val());
+        var lines = to_2d_array($.trim($('#source-textarea').val()));
         var directed = $('input[name=directional]').prop('checked');
 
         if ($('#source-type-to-adjacency-matrix').hasClass('source-type-selected')) {
