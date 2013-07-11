@@ -72,11 +72,14 @@ fontsize = 4.0;
 ratio = auto;''')
         for v in self.vertices:
             description.append('{0} [shape = circle, height=.1, width=.1];'.format(v))
+        already_added = set()
         for v in self.edges:
             for w in self.edges[v]:
-                if self.directed or v < w:
+                pair = (min(v, w), max(v, w))
+                if self.directed or pair not in already_added:
                     description.append('{0} {2} {1} [ label = "" ];'.format(
                         v, w, '->' if self.directed else '--'))
+                    already_added.add(pair)
         description.append('}')
         return '\n'.join(description)
 
